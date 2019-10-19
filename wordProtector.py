@@ -3,8 +3,7 @@
 
 import base64
 
-def enc(x):
-    key = "secret"
+def enc(x, key):
     while len(x) > len(key):
         key += key
     result = []
@@ -18,9 +17,8 @@ def enc(x):
     res = base64.b64encode(encoded).decode()
     return res
 
-def decr(x):
+def decr(x, key):
     x = base64.b64decode(x).decode()
-    key = "secret"
     while len(x) > len(key):
         key += key
     result = []
@@ -31,9 +29,3 @@ def decr(x):
         result.append(chr(xorFusion))
     res = str("".join(map(str, result)))
     return res
-
-word = "hei world, what's up"
-result = enc(word)
-print("your word encrypted : ", result)
-back = decr(result)
-print("your word decrypted : ", back)
